@@ -3,7 +3,6 @@ from pygame.locals import *
 import time
 import random
 
-
 SIZE = 40
 BACKGROUND_COLOR = (110, 110, 5)
 
@@ -70,6 +69,8 @@ class Snake:
 class Game:
     def __init__(self):
         pygame.init()
+        pygame.display.set_caption("Snake Game")
+        pygame.mixer.init()
         self.surface = pygame.display.set_mode((1000, 800))
         self.surface.fill((110, 110, 5))
         self.snake = Snake(self.surface , 1)
@@ -97,10 +98,12 @@ class Game:
             if self.is_collision(self.snake.x[0], self.snake.y[0], self.snake.x[i], self.snake.y[i]):
                 raise "Game Over"
 
+
     def display_score(self):
         font = pygame.font.SysFont("arial", 30)
         score = font.render(f"Score: {self.snake.length}", True, (255, 255, 255))
         self.surface.blit(score, (800,10))
+
 
     def show_game_over(self):
         self.surface.fill(BACKGROUND_COLOR)
@@ -152,11 +155,7 @@ class Game:
             time.sleep(0.2)
 
 
-
 if __name__ == "__main__":
     game = Game()
     game.run()
-
-
-
 
